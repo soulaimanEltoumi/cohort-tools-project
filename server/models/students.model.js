@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
-// Define el esquema para el Estudiante
+const cohort = require("./cohorts.model");
+
 const studentSchema = new Schema({
   firstName: {
     type: String,
@@ -51,7 +52,7 @@ const studentSchema = new Schema({
     ref: "Cohort",
   },
   projects: {
-    type: [Schema.Types.Mixed], // or you can define a more specific schema for projects if needed
+    type: [],
   },
 });
 
