@@ -18,7 +18,11 @@ function CohortDetailsPage() {
 
   const getCohort = useCallback(() => {
     axios
-      .get(`${API_URL}/api/cohorts/${cohortId}`)
+      .get(`${API_URL}/api/cohorts/${cohortId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      })
       .then((response) => {
         const oneCohort = response.data;
         setCohort(oneCohort);
@@ -62,7 +66,6 @@ function CohortDetailsPage() {
           />
         )}
       </div>
-
       <div
         className={`CohortDetails bg-gray-100 py-6 px-4 ${
           showDrawer ? "opacity-30 pointer-events-none" : ""

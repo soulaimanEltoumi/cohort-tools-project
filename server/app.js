@@ -3,6 +3,8 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 require("./db");
 const cors = require("cors");
+
+const isAuthenticated = require("./models/middleware/authMiddleware");
 // const mongoose = require("mongoose");
 
 const app = express();
@@ -27,6 +29,12 @@ const StudentRoutes = require("./routes/students.routes");
 app.use("/api/students", StudentRoutes);
 
 const CohortRoutes = require("./routes/cohorts.routes");
-app.use("/api/cohorts", CohortRoutes);
+app.use("/api/cohorts", isAuthenticated, CohortRoutes);
+
+const authRoutes = require("./routes/auth.routes");
+app.use("/auth", authRoutes);
+
+const UserRoutes = require("./routes/users.routes");
+app.use("/api/users", isAuthenticated, UserRoutes);
 
 module.exports = app;

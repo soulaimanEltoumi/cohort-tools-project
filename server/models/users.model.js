@@ -2,8 +2,9 @@ const { Schema, model } = require("mongoose");
 
 // Define el esquema para la Cohorte
 const userSchema = new Schema({
-  username: String,
+  email: String,
+  password: String,
+  name: String,
 });
-// module.exports = model("Student", studentSchema);
 
 module.exports = model("User", userSchema);
